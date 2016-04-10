@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Get newer images from https://hub.docker.com/_/jenkins/
+docker pull jenkinsci/jenkins:2.0-rc-1
+
+docker build -t jenkins-data -f Dockerfile-data .
+docker build -t jenkins2 .
+sleep 1
+
+docker run --name=jenkins-data jenkins-data
+docker run -p 8080:8080 -p 50000:50000 --name=jenkins-master --volumes-from=jenkins-data -d jenkins2
+sleep 1
+
+echo "Your initial admin password: "
+docker exec jenkins-master cat /var/jenkins_home/secrets/initialAdminPassword
+echo
+
+open http://$(docker-machine ip dockerhost):8080/
