@@ -9,10 +9,24 @@ sleep 1
 
 docker run --name=jenkins-data jenkins-data
 docker run -p 8080:8080 -p 50000:50000 --name=jenkins-master --volumes-from=jenkins-data -d jenkins2
-sleep 1
 
-echo "Your initial admin password: "
-docker exec jenkins-master cat /var/jenkins_home/secrets/initialAdminPassword
+echo -n "Starting Jenkins server"
+for i in {1..20}; do
+  echo -n "."
+  sleep 1
+done
 echo
 
-open http://$(docker-machine ip dockerhost):8080/
+echo "Getting initial Jenkins admin password and copying to the OSX clipboard... "
+docker exec jenkins-master cat /var/jenkins_home/secrets/initialAdminPassword | pbcopy
+pbpaste || echo "Failed to retrieve password"
+sleep 1
+
+read -n 1 -p "Press 'y' to open Jenkins GUI at http://$(docker-machine ip dockerhost):8080/, or any other key to end setup: "
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  open http://$(docker-machine ip dockerhost):8080/
+fi
+echo
+
+echo "Initial setup complete, exiting."
+
