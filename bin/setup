@@ -11,7 +11,7 @@ docker run --name=jenkins-data jenkins-data
 docker run -p 8080:8080 -p 50000:50000 --name=jenkins-master --volumes-from=jenkins-data -d jenkins2
 
 echo -n "Starting Jenkins server"
-for i in {1..20}; do
+for i in {1..30}; do
   echo -n "."
   sleep 1
 done
