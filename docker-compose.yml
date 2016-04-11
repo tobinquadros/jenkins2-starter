@@ -1,0 +1,12 @@
+version: '1'
+services:
+  jenkinsdata:
+    build: 
+      context: .
+      dockerfile: Dockerfile-data
+  jenkinsmaster:
+    build: jenkins-master
+    volumes_from:
+      - jenkinsdata
+    ports:
+      - "50000:50000"
