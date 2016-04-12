@@ -1,17 +1,21 @@
 # Jenkins v2 Starter
 
-Dockerized setup of Jenkins v2 for local testing of Jenkins build configurations, and the Jenkins API.
+Dockerized setup of Jenkins v2 for local testing of Jenkins build
+configurations, and the Jenkins API.
 
 ## Docker Setup
 
-*Note:* Docker must be installed on your system before using the setup scripts.
+*Note:* Docker (w/ docker-compose) must be installed on your system before
+using the setup script.
 
 Clone the repo:
+
 ```
 git clone git@github.com:tobinquadros/jenkins2-starter.git && cd jenkins2-starter
 ```
 
 Run the setup script:
+
 ```
 ./bin/setup
 ```
@@ -40,7 +44,8 @@ and proceed to the browser.
 
 ## Add jobs to Jenkins
 
-*Note:* You can use this repo for the source repository because it has multiple branches and a Jenkinsfile for testing out v2 features.
+*Note:* You can use this repo for the source repository because it has multiple
+branches and a Jenkinsfile for testing out v2 features.
 
 1. Create a pipeline job
 2. Create a multibranch job
@@ -87,4 +92,5 @@ Repo](https://github.com/arangamani/jenkins_api_client) or the
 
 ## Profit
 
-At this point you are ready to further test Jenkins v2 and the Ruby/Go API clients!
+At this point you are ready to further test Jenkins v2 and the Ruby/Go API
+clients!

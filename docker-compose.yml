@@ -1,12 +1,16 @@
-version: '1'
+version: '2'
+
 services:
-  jenkinsdata:
-    build: 
+  jenkins-data:
+    build:
+      context: ./jenkins-data
+  jenkins-master:
+    build:
       context: .
-      dockerfile: Dockerfile-data
-  jenkinsmaster:
-    build: jenkins-master
-    volumes_from:
-      - jenkinsdata
+    depends_on:
+      - jenkins-data
     ports:
+      - "8080:8080"
       - "50000:50000"
+    volumes_from:
+      - jenkins-data

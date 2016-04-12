@@ -1,27 +1,26 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -e
 
-# Allow overriding the docker-machine hostname
+# Environment variable to override the docker-machine hostname
 DOCKER_MACHINE_HOSTNAME=${DOCKER_MACHINE_HOSTNAME:-"default"}
 
-# Get newer images from https://hub.docker.com/_/jenkins/
-docker pull jenkinsci/jenkins:2.0-rc-1
+# Function that waits for container to serve Jenkins
+is_ready() {
+  curl -sI $(docker-machine ip ${DOCKER_MACHINE_HOSTNAME}):8080 | grep "HTTP/1.1 403 Forbidden" &>/dev/null
+}
 
-docker build -t jenkins-data -f Dockerfile-data .
-docker build -t jenkins2 .
-sleep 1
 
-docker run --name=jenkins-data jenkins-data
-docker run -p 8080:8080 -p 50000:50000 --name=jenkins-master --volumes-from=jenkins-data -d jenkins2
+# Main
+docker-compose up -d
 
-echo -n "Starting Jenkins server"
-for second in {1..30}; do
+echo -n "Waiting for Jenkins server response"
+while ! is_ready; do
   echo -n "."
   sleep 1
 done
 echo
 
-echo "Getting initial Jenkins admin password and copying to the OSX clipboard... "
-docker exec jenkins-master cat /var/jenkins_home/secrets/initialAdminPassword | pbcopy
+echo "Getting initial Jenkins admin password and copying to the OSX clipboard"
+docker-compose run jenkins-master cat /var/jenkins_home/secrets/initialAdminPassword | pbcopy
 pbpaste || echo "Failed to retrieve password"
 sleep 1
 
