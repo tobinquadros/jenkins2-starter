@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  jenkins-data:
+    build:
+      context: ./jenkins-data
+  jenkins-master:
+    build:
+      context: .
+    depends_on:
+      - jenkins-data
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes_from:
+      - jenkins-data
