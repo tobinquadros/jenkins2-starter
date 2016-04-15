@@ -47,8 +47,26 @@ and proceed to the browser.
 *Note:* You can use this repo for the source repository because it has multiple
 branches and a Jenkinsfile for testing out v2 features.
 
-1. Create a pipeline job
-2. Create a multibranch job
+Jenkins has updated [docs](https://jenkins.io/doc/) for the key new features.
+
+1. Create a [pipeline](https://jenkins.io/doc/pipeline/) job
+2. Create a multibranch-pipeline job
+
+#### Save the jobs you just created
+
+There is a simple script that will copy a job's `config.xml` from the docker
+container into a local `job-configs` directory. This makes it easy to play
+around with the Jenkins GUI and save your work in source control.
+
+Run the `get-job-config` script, the file will be copied to
+`job-configs/${JOB_NAME}/${CONFIG_NAME:-"config.xml"}` (sub-directories are
+.gitignored):
+
+Usage:
+
+```
+./bin/get-job-config source-job-name [target-filename]
+```
 
 ## Run the Jenkins API client starter scripts
 
