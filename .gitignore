@@ -1,1 +1,5 @@
 Gemfile.lock
+
+# Do not allow job-configs to be saved, except the example for this repo
+job-configs/*
+!job-configs/repo-config.xml

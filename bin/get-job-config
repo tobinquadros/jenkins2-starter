@@ -1,0 +1,12 @@
+#!/usr/bin/env bash -e
+
+# Optional new filename passed in as arg
+JOB_NAME=${1:-"example"}
+CONFIG_NAME=${2}
+
+# Ensure directory is available (.gitignored)
+mkdir -p job-configs/${JOB_NAME}
+
+# Copy the Jenkins config.xml for the named job
+docker cp $(docker ps -q --filter="name=jenkins2starter"):/var/jenkins_home/jobs/${JOB_NAME}/config.xml \
+  job-configs/${JOB_NAME}/${CONFIG_NAME}
