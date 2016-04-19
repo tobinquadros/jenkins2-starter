@@ -3,7 +3,7 @@
 require 'dotenv'
 require 'jenkins_api_client'
 
-Dotenv.load(File.join(File.dirname(File.dirname(__FILE__)), ".env")) || exit
+Dotenv.load!
 
 @client = JenkinsApi::Client.new(:server_ip => ENV['JENKINS_SERVER_IP'],
                                  :server_port => ENV['JENKINS_SERVER_PORT'],
