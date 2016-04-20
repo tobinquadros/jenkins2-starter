@@ -1,7 +1,11 @@
 #!/usr/bin/env ruby
 
+# An interactive ruby console for exploring the Jenkins API
+
+require 'bundler/setup'
 require 'dotenv'
 require 'jenkins_api_client'
+require 'pry'
 
 Dotenv.load!
 
@@ -10,7 +14,5 @@ Dotenv.load!
                                  :username => ENV['JENKINS_USERNAME'],
                                  :password => ENV['JENKINS_PASSWORD'])
 
-@client.job.list_all.each do |job|
-  puts "Found job: #{job}"
-end
-
+# @client contains a configured instance of the JenkinsApi::Client class
+binding.pry
