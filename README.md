@@ -5,7 +5,7 @@ configurations, and the Jenkins API.
 
 ## Docker Setup
 
-*Note:* Docker (w/ docker-compose) must be installed on your system before
+**Note:** Docker (w/ docker-compose) must be installed on your system before
 using the setup script.
 
 Clone the repo:
@@ -44,7 +44,7 @@ and proceed to the browser.
 
 ## Add jobs to Jenkins
 
-*Note:* You can use this repo for the source repository because it has multiple
+**Note:** You can use this repo for the source repository because it has multiple
 branches and a Jenkinsfile for testing out v2 features.
 
 Jenkins has updated [docs](https://jenkins.io/doc/) for the key new features.
@@ -52,7 +52,7 @@ Jenkins has updated [docs](https://jenkins.io/doc/) for the key new features.
 1. Create a [pipeline](https://jenkins.io/doc/pipeline/) job
 2. Create a multibranch-pipeline job
 
-#### Save the jobs you just created
+###### Save job configuration to local file
 
 There is a simple script that will copy a job's `config.xml` from the docker
 container into a local `job-configs` directory. This makes it easy to play
@@ -103,6 +103,22 @@ Run the starter script:
 ```
 ./ruby-client/list-jobs.rb
 ```
+
+###### To explore the Ruby Jenkins API from a pry console (REPL):
+
+```
+./ruby-client/api-console.rb
+```
+
+To iterate on API calls in an editor, and drop back into pry after exiting the
+editor:
+
+```
+[1] pry(main)> edit -c
+
+# For more info on pry type 'help'
+```
+
 
 For more info see the [JenkinsAPIClient Github
 Repo](https://github.com/arangamani/jenkins_api_client) or the
