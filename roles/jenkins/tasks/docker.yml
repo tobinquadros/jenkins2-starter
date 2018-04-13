@@ -1,0 +1,11 @@
+---
+- name: install docker daemon
+  apt:
+    name: docker.io
+    update_cache: yes
+
+- name: install docker-compose
+  apt:
+    name: docker-compose
+    update_cache: yes
+
